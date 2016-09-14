@@ -2,3 +2,5 @@
 *.bak
 *.log
 *.out
+
+node_modules
