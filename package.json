@@ -1,0 +1,27 @@
+{
+  "name": "postcss-dpr",
+  "version": "0.0.0",
+  "description": "dpr transformer for flexible",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crossjs/postcss-dpr.git"
+  },
+  "keywords": [
+    "dpr",
+    "css",
+    "flexible"
+  ],
+  "author": "crossjs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/crossjs/postcss-dpr/issues"
+  },
+  "homepage": "https://github.com/crossjs/postcss-dpr#readme",
+  "dependencies": {
+    "postcss": "^5.2.0",
+  }
+}
