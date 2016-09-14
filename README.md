@@ -1,4 +1,4 @@
-# postcss-dpr
+# postcss-flexible
 
 This is a [postcss](https://www.npmjs.com/package/postcss) plugin.
 
@@ -15,7 +15,7 @@ module.exports = {
     ]
   },
   postcss: function() {
-    return [require('postcss-dpr')({remUnit: 75})]
+    return [require('postcss-flexible')({remUnit: 75})]
   }
 }
 ```
