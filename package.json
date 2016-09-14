@@ -22,6 +22,6 @@
   },
   "homepage": "https://github.com/crossjs/postcss-dpr#readme",
   "dependencies": {
-    "postcss": "^5.2.0",
+    "postcss": "^5.2.0"
   }
 }
