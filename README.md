@@ -32,7 +32,7 @@ before processing:
   font-size: dpr(32px);
   width: rem(75px);
   line-height: 3;
-  /* there is qr@1x, qr@2x, qr@3x in images folder */
+  /* replace all @[1-3]x in urls: `/a/@2x/x.png`, `/a@2x/x.png` or `/a/x@2x.png` */
   background-image: url(/images/qr@2x.png);
 }
 ```
