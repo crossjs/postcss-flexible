@@ -6,7 +6,7 @@ This is a [postcss](https://www.npmjs.com/package/postcss) plugin.
 
 ### Webpack
 
-```
+```js
 module.exports = {
   module: {
     loaders: [
@@ -17,6 +17,7 @@ module.exports = {
     ]
   },
   postcss: function() {
+    // remUnit defaults to 75
     return [require('postcss-flexible')({remUnit: 75})]
   }
 }
@@ -31,6 +32,8 @@ before processing:
   font-size: dpr(32px);
   width: rem(75px);
   line-height: 3;
+  /* there is qr@1x, qr@2x, qr@3x in images folder */
+  background-image: url(/images/qr@2x.png);
 }
 ```
 
@@ -43,16 +46,23 @@ after processing:
 }
 [data-dpr="1"] .selector {
   font-size: 16px;
+  background-image: url(/images/qr@1x.png);
 }
 [data-dpr="2"] .selector {
   font-size: 32px;
+  background-image: url(/images/qr@2x.png);
 }
 [data-dpr="3"] .selector {
   font-size: 48px;
+  background-image: url(/images/qr@3x.png);
 }
 ```
 
 ## Change Log
+
+### 0.1.0
+
+* handle `url()`
 
 ### 0.0.3
 
