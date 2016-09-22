@@ -1,0 +1,6 @@
+.selector {
+  font-size: dpr(32px);
+  width: rem(75px);
+  line-height: 3;
+  background-image: url(/images/qr@2x.png);
+}

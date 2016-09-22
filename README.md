@@ -2,6 +2,11 @@
 
 This is a [postcss](https://www.npmjs.com/package/postcss) plugin.
 
+[![Travis](https://img.shields.io/travis/crossjs/postcss-flexible.svg?style=flat-square)](https://travis-ci.org/crossjs/postcss-flexible)
+[![Coveralls](https://img.shields.io/coveralls/crossjs/postcss-flexible.svg?style=flat-square)](https://coveralls.io/github/crossjs/postcss-flexible)
+[![dependencies](https://david-dm.org/crossjs/postcss-flexible.svg?style=flat-square)](https://david-dm.org/crossjs/postcss-flexible)
+[![devDependency Status](https://david-dm.org/crossjs/postcss-flexible/dev-status.svg?style=flat-square)](https://david-dm.org/crossjs/postcss-flexible?type=dev)
+
 ## Usage
 
 ### Webpack

@@ -1,10 +1,10 @@
 {
   "name": "postcss-flexible",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "flexible transformer for flexible",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "istanbul cover _mocha"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,12 @@
   "homepage": "https://github.com/crossjs/postcss-flexible#readme",
   "dependencies": {
     "css": "^2.2.1",
+    "extend": "^3.0.0",
+    "postcss": "^5.2.0"
+  },
+  "devDependencies": {
+    "istanbul": "0.4.5",
+    "mocha": "^3.0.2",
     "postcss": "^5.2.0"
   }
 }
