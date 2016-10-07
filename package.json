@@ -1,6 +1,6 @@
 {
   "name": "postcss-flexible",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "flexible transformer for flexible",
   "main": "index.js",
   "scripts": {
@@ -24,8 +24,6 @@
   },
   "homepage": "https://github.com/crossjs/postcss-flexible#readme",
   "dependencies": {
-    "css": "^2.2.1",
-    "extend": "^3.0.0",
     "postcss": "^5.2.0"
   },
   "devDependencies": {

@@ -13,12 +13,13 @@ describe('postcss-flexible', function() {
     var srcText = fs.readFileSync(srcPath, {
       encoding: 'utf8'
     });
-    var outputText = postcss().use(flexible({
-      remUnit: 75
-    })).process(srcText).css;
+    var outputText = postcss().use(flexible()).process(srcText).css;
     var expectedText = fs.readFileSync(path.join(__dirname, 'output.css'), {
       encoding: 'utf8'
     });
+    fs.writeFileSync(path.join(__dirname, 'output2.css'), outputText.trim(), {
+      encoding: 'utf8'
+    })
     assert.equal(outputText.trim(), expectedText.trim());
   });
 
