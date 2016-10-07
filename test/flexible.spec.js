@@ -8,7 +8,7 @@ var flexible = require('../index.js');
 
 describe('postcss-flexible', function() {
 
-  it('[default] should output right rem file', function() {
+  it('should output right css text', function() {
     var srcPath = path.join(__dirname, 'source.css');
     var srcText = fs.readFileSync(srcPath, {
       encoding: 'utf8'
