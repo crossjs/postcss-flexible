@@ -17,9 +17,6 @@ describe('postcss-flexible', function() {
     var expectedText = fs.readFileSync(path.join(__dirname, 'output.css'), {
       encoding: 'utf8'
     });
-    fs.writeFileSync(path.join(__dirname, 'output2.css'), outputText.trim(), {
-      encoding: 'utf8'
-    })
     assert.equal(outputText.trim(), expectedText.trim());
   });
 
