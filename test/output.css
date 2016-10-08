@@ -64,3 +64,15 @@
     transform: rotate(1turn);
   }
 }
+
+html[dir="rtl"][data-dpr="1"] body {
+  padding: 4px;
+}
+
+html[dir="rtl"][data-dpr="2"] body {
+  padding: 8px;
+}
+
+html[dir="rtl"][data-dpr="3"] body {
+  padding: 12px;
+}

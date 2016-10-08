@@ -52,6 +52,9 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
         for (var dpr = 3; dpr >= 1; dpr--) {
           var newRule = postcss.rule({
             selectors: rule.selectors.map(function (sel) {
+              if (/^html/.test(sel)) {
+                return sel.replace(/^html/, 'html[data-dpr="' + dpr + '"]')
+              }
               return '[data-dpr="' + dpr + '"] ' + sel
             }),
             type: rule.type
