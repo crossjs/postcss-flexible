@@ -65,14 +65,14 @@
   }
 }
 
-html[dir="rtl"][data-dpr="1"] body {
+html[data-dpr="1"][dir="rtl"] body {
   padding: 4px;
 }
 
-html[dir="rtl"][data-dpr="2"] body {
+html[data-dpr="2"][dir="rtl"] body {
   padding: 8px;
 }
 
-html[dir="rtl"][data-dpr="3"] body {
+html[data-dpr="3"][dir="rtl"] body {
   padding: 12px;
 }
