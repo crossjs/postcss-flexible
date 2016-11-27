@@ -42,60 +42,60 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
     }
 
     root.walkRules(function (rule) {
-        if (rule.selector.indexOf('[data-dpr="') !== -1) {
-          return
-        }
+      if (rule.selector.indexOf('[data-dpr="') !== -1) {
+        return
+      }
 
-        var newRules = []
-        var hasDecls = false
+      var newRules = []
+      var hasDecls = false
 
-        for (var dpr = 3; dpr >= 1; dpr--) {
-          var newRule = postcss.rule({
-            selectors: rule.selectors.map(function (sel) {
-              if (/^html/.test(sel)) {
-                return sel.replace(/^html/, 'html[data-dpr="' + dpr + '"]')
-              }
-              return '[data-dpr="' + dpr + '"] ' + sel
-            }),
-            type: rule.type
-          })
-          newRules.push(newRule)
-        }
+      for (var dpr = 3; dpr >= 1; dpr--) {
+        var newRule = postcss.rule({
+          selectors: rule.selectors.map(function (sel) {
+            if (/^html/.test(sel)) {
+              return sel.replace(/^html/, 'html[data-dpr="' + dpr + '"]')
+            }
+            return 'html[data-dpr="' + dpr + '"] ' + sel
+          }),
+          type: rule.type
+        })
+        newRules.push(newRule)
+      }
 
-        rule.walkDecls(function (decl) {
-          if (valueRegExp.test(decl.value)) {
-            if (decl.value === '0px') {
-              decl.value = '0'
-            } else {
-              if (dprRegExp.test(decl.value) || urlRegExp.test(decl.value)) {
-                // generate 3 new decls and put them in the new rules which has [data-dpr]
-                newRules.forEach(function (newRule, index) {
-                  var newDecl = postcss.decl({
-                    prop: decl.prop,
-                    value: getCalcValue(decl.value, 3 - index)
-                  })
-                  newRule.append(newDecl)
+      rule.walkDecls(function (decl) {
+        if (valueRegExp.test(decl.value)) {
+          if (decl.value === '0px') {
+            decl.value = '0'
+          } else {
+            if (dprRegExp.test(decl.value) || urlRegExp.test(decl.value)) {
+              // generate 3 new decls and put them in the new rules which has [data-dpr]
+              newRules.forEach(function (newRule, index) {
+                var newDecl = postcss.decl({
+                  prop: decl.prop,
+                  value: getCalcValue(decl.value, 3 - index)
                 })
-                hasDecls = true
-                decl.remove() // delete this rule
-              } else {
-                // only has rem()
-                decl.value = getCalcValue(decl.value)
-              }
+                newRule.append(newDecl)
+              })
+              hasDecls = true
+              decl.remove() // delete this rule
+            } else {
+              // only has rem()
+              decl.value = getCalcValue(decl.value)
             }
           }
-        })
-
-        if (hasDecls) {
-          newRules.forEach(function (newRule) {
-            rule.parent.insertAfter(rule, newRule)
-          })
-        }
-
-        // if the origin rule has no declarations, delete it
-        if (!rule.nodes.length) {
-          rule.remove()
         }
       })
+
+      if (hasDecls) {
+        newRules.forEach(function (newRule) {
+          rule.parent.insertAfter(rule, newRule)
+        })
+      }
+
+      // if the origin rule has no declarations, delete it
+      if (!rule.nodes.length) {
+        rule.remove()
+      }
+    })
   }
 })
