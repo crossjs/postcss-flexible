@@ -49,15 +49,15 @@ after processing:
   width: 1rem;
   line-height: 3;
 }
-[data-dpr="1"] .selector {
+html[data-dpr="1"] .selector {
   font-size: 16px;
   background-image: url(/images/qr@1x.png);
 }
-[data-dpr="2"] .selector {
+html[data-dpr="2"] .selector {
   font-size: 32px;
   background-image: url(/images/qr@2x.png);
 }
-[data-dpr="3"] .selector {
+html[data-dpr="3"] .selector {
   font-size: 48px;
   background-image: url(/images/qr@3x.png);
 }
