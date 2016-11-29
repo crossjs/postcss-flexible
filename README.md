@@ -6,6 +6,7 @@ This is a [postcss](https://www.npmjs.com/package/postcss) plugin.
 [![Coveralls](https://img.shields.io/coveralls/crossjs/postcss-flexible.svg?style=flat-square)](https://coveralls.io/github/crossjs/postcss-flexible)
 [![dependencies](https://david-dm.org/crossjs/postcss-flexible.svg?style=flat-square)](https://david-dm.org/crossjs/postcss-flexible)
 [![devDependency Status](https://david-dm.org/crossjs/postcss-flexible/dev-status.svg?style=flat-square)](https://david-dm.org/crossjs/postcss-flexible?type=dev)
+[![NPM version](https://img.shields.io/npm/v/postcss-flexible.svg?style=flat-square)](https://npmjs.org/package/postcss-flexible)
 
 ## Usage
 
