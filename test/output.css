@@ -4,53 +4,53 @@
   line-height: 3;
 }
 
-html[data-dpr="1"] .selector, html[data-dpr="1"] .selector2 {
+[data-dpr="1"] .selector, [data-dpr="1"] .selector2 {
   font-size: 16px;
   background-image: url(/images/qr@1x.png);
 }
 
-html[data-dpr="2"] .selector, html[data-dpr="2"] .selector2 {
+[data-dpr="2"] .selector, [data-dpr="2"] .selector2 {
   font-size: 32px;
   background-image: url(/images/qr@2x.png);
 }
 
-html[data-dpr="3"] .selector, html[data-dpr="3"] .selector2 {
+[data-dpr="3"] .selector, [data-dpr="3"] .selector2 {
   font-size: 48px;
   background-image: url(/images/qr@3x.png);
 }
 
-html[data-dpr="1"] .selector3 {
+[data-dpr="1"] .selector3 {
   padding: 10px;
 }
 
-html[data-dpr="2"] .selector3 {
+[data-dpr="2"] .selector3 {
   padding: 20px;
 }
 
-html[data-dpr="3"] .selector3 {
+[data-dpr="3"] .selector3 {
   padding: 30px;
 }
 
-html[data-dpr="1"] .selector4 {
+[data-dpr="1"] .selector4 {
   background: url(/images/qr@1x.png) 10px 0.266667rem;
 }
 
-html[data-dpr="2"] .selector4 {
+[data-dpr="2"] .selector4 {
   background: url(/images/qr@2x.png) 20px 0.266667rem;
 }
 
-html[data-dpr="3"] .selector4 {
+[data-dpr="3"] .selector4 {
   background: url(/images/qr@3x.png) 30px 0.266667rem;
 }
 
 @media screen and (min-width: 480px) {
-  html[data-dpr="1"] body {
+  [data-dpr="1"] body {
     margin: 10px;
   }
-  html[data-dpr="2"] body {
+  [data-dpr="2"] body {
     margin: 20px;
   }
-  html[data-dpr="3"] body {
+  [data-dpr="3"] body {
     margin: 30px;
   }
 }
