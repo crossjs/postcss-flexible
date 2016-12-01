@@ -55,7 +55,7 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
             if (/^html/.test(sel)) {
               return sel.replace(/^html/, 'html[data-dpr="' + dpr + '"]')
             }
-            return 'html[data-dpr="' + dpr + '"] ' + sel
+            return '[data-dpr="' + dpr + '"] ' + sel
           }),
           type: rule.type
         })
