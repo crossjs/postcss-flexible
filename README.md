@@ -50,15 +50,18 @@ after processing:
   width: 1rem;
   line-height: 3;
 }
-html[data-dpr="1"] .selector {
+
+[data-dpr="1"] .selector {
   font-size: 16px;
   background-image: url(/images/qr@1x.png);
 }
-html[data-dpr="2"] .selector {
+
+[data-dpr="2"] .selector {
   font-size: 32px;
   background-image: url(/images/qr@2x.png);
 }
-html[data-dpr="3"] .selector {
+
+[data-dpr="3"] .selector {
   font-size: 48px;
   background-image: url(/images/qr@3x.png);
 }
