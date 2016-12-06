@@ -1,6 +1,6 @@
 # postcss-flexible
 
-This is a [postcss](https://www.npmjs.com/package/postcss) plugin for translating `dpr(...)`, `rem(...)`, `url(...)`. Similar to [postcss-px2rem](https://github.com/songsiqi/px2rem-postcss), but using custom function istead of comments for syntax.
+This is a [postcss](https://www.npmjs.com/package/postcss) plugin for translating `dpr(...)`, `rem(...)`, `url(...)`. Similar to [px2rem](https://github.com/songsiqi/px2rem-postcss), but using custom function istead of comments for syntax.
 
 [![Travis](https://img.shields.io/travis/crossjs/postcss-flexible.svg?style=flat-square)](https://travis-ci.org/crossjs/postcss-flexible)
 [![Coveralls](https://img.shields.io/coveralls/crossjs/postcss-flexible.svg?style=flat-square)](https://coveralls.io/github/crossjs/postcss-flexible)
