@@ -29,7 +29,7 @@ module.exports = {
 }
 ```
 
-### Example
+## Example
 
 before processing:
 
@@ -65,6 +65,10 @@ html[data-dpr="3"] .selector {
 ```
 
 ## Change Log
+
+### 0.3.0
+
+* add option `desktop` and `addPrefixToSelector`
 
 ### 0.1.0
 

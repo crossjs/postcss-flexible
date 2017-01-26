@@ -1,0 +1,35 @@
+.selector,
+.selector2 {
+  font-size: 32px;
+  width: 1rem;
+  line-height: 3;
+  background-image: url(/images/qr@2x.png);
+}
+
+.selector3 {
+  padding: 20px;
+}
+
+.selector4 {
+  background: url(/images/qr@2x.png) 20px 0.266667rem;
+}
+
+@media screen and (min-width: 480px) {
+  body {
+    margin: 20px;
+  }
+}
+
+@keyframes c-spinner-snake {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+html[dir="rtl"] body {
+  padding: 8px;
+}

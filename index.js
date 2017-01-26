@@ -12,9 +12,16 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
   }
 
   return function (root, result) {
+    var desktop = !!options.desktop
     var baseDpr = options.baseDpr || 2
     var remUnit = options.remUnit || 75
     var remPrecision = options.remPrecision || 6
+    var addPrefixToSelector = options.addPrefixToSelector || function (selector, prefix) {
+      if (/^html/.test(selector)) {
+        return selector.replace(/^html/, 'html' + prefix)
+      }
+      return prefix + ' ' + selector
+    }
 
     // get calculated value of px or rem
     function getCalcValue (value, dpr) {
@@ -40,22 +47,36 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
         return $0
       })
     }
-
-    root.walkRules(function (rule) {
+    
+    function handleDesktop (rule) {
+      rule.walkDecls(function (decl) {
+        if (valueRegExp.test(decl.value)) {
+          if (decl.value === '0px') {
+            decl.value = '0'
+          } else {
+            if (dprRegExp.test(decl.value) || urlRegExp.test(decl.value)) {
+              decl.value = getCalcValue(decl.value, 2)
+            } else {
+              // only has rem()
+              decl.value = getCalcValue(decl.value)
+            }
+          }
+        }
+      })
+    }
+    
+    function handleMobile (rule) {
       if (rule.selector.indexOf('[data-dpr="') !== -1) {
         return
       }
 
       var newRules = []
       var hasDecls = false
-
+      
       for (var dpr = 3; dpr >= 1; dpr--) {
         var newRule = postcss.rule({
           selectors: rule.selectors.map(function (sel) {
-            if (/^html/.test(sel)) {
-              return sel.replace(/^html/, 'html[data-dpr="' + dpr + '"]')
-            }
-            return '[data-dpr="' + dpr + '"] ' + sel
+            return addPrefixToSelector(sel, '[data-dpr="' + dpr + '"]')
           }),
           type: rule.type
         })
@@ -96,6 +117,10 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
       if (!rule.nodes.length) {
         rule.remove()
       }
+    }
+
+    root.walkRules(function (rule) {
+      desktop ? handleDesktop(rule) : handleMobile(rule)
     })
   }
 })
