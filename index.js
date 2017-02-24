@@ -22,6 +22,10 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
       }
       return prefix + ' ' + selector
     }
+    var aDpr = options.aDpr || [3,2,1];
+    aDpr.sort(function(a,b){
+      return b - a;
+    });
 
     // get calculated value of px or rem
     function getCalcValue (value, dpr) {
@@ -31,7 +35,6 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
         val = parseFloat(val.toFixed(remPrecision)) // control decimal precision of the calculated value
         return val == 0 ? val : val + type
       }
-
       return value.replace(valueGlobalRegExp, function ($0, $1, $2) {
         if ($1 === 'url') {
           if (dpr) {
@@ -72,11 +75,11 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
 
       var newRules = []
       var hasDecls = false
-      
-      for (var dpr = 3; dpr >= 1; dpr--) {
+  
+      for (var i=0;i<aDpr.length;i++) {
         var newRule = postcss.rule({
           selectors: rule.selectors.map(function (sel) {
-            return addPrefixToSelector(sel, '[data-dpr="' + dpr + '"]')
+            return addPrefixToSelector(sel, '[data-dpr="' + aDpr[i] + '"]')
           }),
           type: rule.type
         })
@@ -93,7 +96,7 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
               newRules.forEach(function (newRule, index) {
                 var newDecl = postcss.decl({
                   prop: decl.prop,
-                  value: getCalcValue(decl.value, 3 - index)
+                  value: getCalcValue(decl.value, aDpr[index])
                 })
                 newRule.append(newDecl)
               })
