@@ -67,7 +67,20 @@ After processing:
 }
 ```
 
+## options
+
+- `desktop`: boolean, default `false`
+- `baseDpr`: number, default `2`
+- `remUnit`: number, default `75`
+- `remPrecision`: number, default `6`
+- `addPrefixToSelector`: function
+- `dprList`: array, default `[3, 2, 1]`
+
 ## Change Log
+
+### 0.4.0
+
+* support custom `dprList`
 
 ### 0.3.0
 
