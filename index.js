@@ -22,7 +22,7 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
       }
       return prefix + ' ' + selector
     }
-    var dprList = options.dprList.sort().reverse() || [3, 2, 1]
+    var dprList = (options.dprList || [3, 2, 1]).sort().reverse()
 
     // get calculated value of px or rem
     function getCalcValue (value, dpr) {
