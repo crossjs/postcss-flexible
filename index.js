@@ -22,10 +22,7 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
       }
       return prefix + ' ' + selector
     }
-    var aDpr = options.aDpr || [3, 2, 1]
-    aDpr.sort(function(a, b){
-      return b - a
-    })
+    var dprList = options.dprList.sort().reverse() || [3, 2, 1]
 
     // get calculated value of px or rem
     function getCalcValue (value, dpr) {
@@ -50,7 +47,7 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
         return $0
       })
     }
-    
+
     function handleDesktop (rule) {
       rule.walkDecls(function (decl) {
         if (valueRegExp.test(decl.value)) {
@@ -67,7 +64,7 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
         }
       })
     }
-    
+
     function handleMobile (rule) {
       if (rule.selector.indexOf('[data-dpr="') !== -1) {
         return
@@ -75,11 +72,11 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
 
       var newRules = []
       var hasDecls = false
-  
-      for (var i = 0;i < aDpr.length; i++) {
+
+      for (var i = 0; i < dprList.length; i++) {
         var newRule = postcss.rule({
           selectors: rule.selectors.map(function (sel) {
-            return addPrefixToSelector(sel, '[data-dpr="' + aDpr[i] + '"]')
+            return addPrefixToSelector(sel, '[data-dpr="' + dprList[i] + '"]')
           }),
           type: rule.type
         })
@@ -96,7 +93,7 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
               newRules.forEach(function (newRule, index) {
                 var newDecl = postcss.decl({
                   prop: decl.prop,
-                  value: getCalcValue(decl.value, aDpr[index])
+                  value: getCalcValue(decl.value, dprList[index])
                 })
                 newRule.append(newDecl)
               })
