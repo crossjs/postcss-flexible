@@ -46,4 +46,16 @@ describe('postcss-flexible', function() {
     assert.equal(outputText.trim(), expectedText.trim())
   })
 
+  it('should output right css text with dprList', function() {
+    var srcPath = path.join(__dirname, 'source.css')
+    var srcText = fs.readFileSync(srcPath, {
+      encoding: 'utf8'
+    })
+    var outputText = postcss().use(flexible({ dprList: [4, 2] })).process(srcText).css
+    var expectedText = fs.readFileSync(path.join(__dirname, 'output-custom-2.css'), {
+      encoding: 'utf8'
+    })
+    assert.equal(outputText.trim(), expectedText.trim())
+  })
+
 })

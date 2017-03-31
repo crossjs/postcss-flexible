@@ -4,7 +4,8 @@
   "description": "flexible transformer for flexible",
   "main": "index.js",
   "scripts": {
-    "test": "istanbul cover _mocha"
+    "test": "istanbul cover _mocha",
+    "test-win": "istanbul cover node_modules/mocha/bin/_mocha"
   },
   "repository": {
     "type": "git",

@@ -4,7 +4,6 @@ var postcss = require('postcss')
 
 var valueRegExp = /(dpr|rem|url)\((.+?)(px)?\)/
 var dprRegExp = /dpr\((\d+(?:\.\d+)?)px\)/
-var urlRegExp = /url\(['"]?\S+?@[1-3]x\S+?['"]?\)/
 
 module.exports = postcss.plugin('postcss-flexible', function (options) {
   if (!options) {
@@ -23,6 +22,7 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
       return prefix + ' ' + selector
     }
     var dprList = (options.dprList || [3, 2, 1]).sort().reverse()
+    var urlRegExp = new RegExp('url\\([\'"]?\\S+?@(' + dprList.join('|') + ')x\\S+?[\'"]?\\)')
 
     // get calculated value of px or rem
     function getCalcValue (value, dpr) {
@@ -35,7 +35,7 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
       return value.replace(valueGlobalRegExp, function ($0, $1, $2) {
         if ($1 === 'url') {
           if (dpr) {
-            return 'url(' + $2.replace(/@[1-3]x/g, '@' + dpr + 'x') + ')'
+            return 'url(' + $2.replace(new RegExp('@(' + dprList.join('|') + ')x', 'g'), '@' + dpr + 'x') + ')'
           }
         } else if ($1 === 'dpr') {
           if (dpr) {
@@ -55,7 +55,7 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
             decl.value = '0'
           } else {
             if (dprRegExp.test(decl.value) || urlRegExp.test(decl.value)) {
-              decl.value = getCalcValue(decl.value, 2)
+              decl.value = getCalcValue(decl.value, baseDpr)
             } else {
               // only has rem()
               decl.value = getCalcValue(decl.value)
