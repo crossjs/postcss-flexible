@@ -22,10 +22,10 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
       }
       return prefix + ' ' + selector
     }
-    var aDpr = options.aDpr || [3,2,1];
-    aDpr.sort(function(a,b){
-      return b - a;
-    });
+    var aDpr = options.aDpr || [3, 2, 1]
+    aDpr.sort(function(a, b){
+      return b - a
+    })
 
     // get calculated value of px or rem
     function getCalcValue (value, dpr) {
@@ -76,7 +76,7 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
       var newRules = []
       var hasDecls = false
   
-      for (var i=0;i<aDpr.length;i++) {
+      for (var i = 0;i < aDpr.length; i++) {
         var newRule = postcss.rule({
           selectors: rule.selectors.map(function (sel) {
             return addPrefixToSelector(sel, '[data-dpr="' + aDpr[i] + '"]')
