@@ -75,8 +75,23 @@ After processing:
 - `remPrecision`: number, default `6`
 - `addPrefixToSelector`: function
 - `dprList`: array, default `[3, 2, 1]`
+- `fontGear`: array, default `[-1, 0, 1, 2, 3, 4]`
+- `enableFontSetting`: boolean, default `false`
+- `addFontSizeToSelector`: function
+- `outputCSSFile`: function
 
 ## Change Log
+
+* add: generate different css files with fontGear
+* support custom `fontGear`
+* support custom `enableFontSetting`
+* support custom `addFontSizeToSelector`
+* support custom `outputCSSFile`
+
+
+### 0.5.0
+
+* support custom `dprList`
 
 ### 0.4.0
 
