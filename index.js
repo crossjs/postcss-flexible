@@ -25,7 +25,10 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
       }
       return prefix + ' ' + selector
     }
-    var addFontSizeToSelector = function (originFontSize, gear = 0, baseDpr = 2) {
+    var addFontSizeToSelector = function (originFontSize, gear, baseDpr) {
+      if (!gear) {
+        gear = 0
+      }
       if (!enableFontSetting) {
         return originFontSize
       }
@@ -151,7 +154,6 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
           desktop ? handleDesktop(rule) : handleMobile(rule, gear)
         })
       }
-    } else {
     }
     root.walkRules(function (rule) {
       desktop ? handleDesktop(rule) : handleMobile(rule)

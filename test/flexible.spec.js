@@ -83,7 +83,10 @@ describe('postcss-flexible', function() {
       encoding: 'utf8'
     })
     const fontGear = [-1, 0, 1, 2, 3, 4]
-    const addFontSizeToSelector = function (originFontSize, gear, baseDpr = 2) {
+    const addFontSizeToSelector = function (originFontSize, gear, baseDpr) {
+      if (!baseDpr) {
+        baseDpr = 2
+      }
       return +originFontSize + gear*baseDpr*2
     }
     const output = postcss().use(flexible({ enableFontSetting: true, fontGear: fontGear, addFontSizeToSelector: addFontSizeToSelector })).process(srcText).css
