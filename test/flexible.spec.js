@@ -63,9 +63,17 @@ describe('postcss-flexible', function() {
     var srcText = fs.readFileSync(srcPath, {
       encoding: 'utf8'
     })
-    const fontGear = [-1, 0, 1, 2, 3, 4]
-
-    postcss().use(flexible({ enableFontSetting: true, fontGear: fontGear })).process(srcText).css
+    var fontGear = [-1, 0, 1, 2, 3, 4]
+    var outputCSSFile = function(gear, clonedRoot) {
+      gear !== undefined && fs.writeFileSync(path.join(__dirname, 'fontGear/fontGear_' + gear +'.css'), clonedRoot, {
+        encoding: 'utf8'
+      })
+    }
+    postcss().use(flexible({
+      enableFontSetting: true,
+      fontGear: fontGear,
+      outputCSSFile: outputCSSFile
+    })).process(srcText).css
     // console.log(outputText)
     for (let i = -1, len = fontGear.length - 1; i < len; i++) {
       var outputText = fs.readFileSync(path.join(__dirname, 'fontGear/fontGear_' + i +'.css'), {
@@ -82,14 +90,24 @@ describe('postcss-flexible', function() {
     var srcText = fs.readFileSync(srcPath, {
       encoding: 'utf8'
     })
-    const fontGear = [-1, 0, 1, 2, 3, 4]
-    const addFontSizeToSelector = function (originFontSize, gear, baseDpr) {
+    var fontGear = [-1, 0, 1, 2, 3, 4]
+    var addFontSizeToSelector = function (originFontSize, gear, baseDpr) {
       if (!baseDpr) {
         baseDpr = 2
       }
       return +originFontSize + gear*baseDpr*2
     }
-    const output = postcss().use(flexible({ enableFontSetting: true, fontGear: fontGear, addFontSizeToSelector: addFontSizeToSelector })).process(srcText).css
+    var outputCSSFile = function(gear, clonedRoot) {
+      gear !== undefined && fs.writeFileSync(path.join(__dirname, 'fontGear/fontGear_' + gear +'.css'), clonedRoot, {
+        encoding: 'utf8'
+      })
+    }
+    var output = postcss().use(flexible({
+      enableFontSetting: true,
+      fontGear: fontGear,
+      addFontSizeToSelector: addFontSizeToSelector,
+      outputCSSFile: outputCSSFile
+    })).process(srcText).css
     var expectedText = fs.readFileSync(path.join(__dirname, 'output.css'), {
       encoding: 'utf8'
     })
@@ -109,7 +127,7 @@ describe('postcss-flexible', function() {
     var srcText = fs.readFileSync(srcPath, {
       encoding: 'utf8'
     })
-    const fontGear = [-1, 0, 1, 2, 3, 4]
+    var fontGear = [-1, 0, 1, 2, 3, 4]
     var outputCSSFile = function(gear, clonedRoot) {
       gear !== undefined && fs.writeFileSync(path.join(__dirname, 'customFile/fontGear_' + gear +'.css'), clonedRoot, {
         encoding: 'utf8'

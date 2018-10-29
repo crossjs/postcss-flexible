@@ -37,11 +37,7 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
       }
       return +originFontSize + gear*baseDpr
     }
-    var outputCSSFile = options.outputCSSFile || function (gear, clonedRoot) {
-      gear !== undefined && fs.writeFileSync(path.join(__dirname, 'test/fontGear/fontGear_' + gear +'.css'), clonedRoot, {
-        encoding: 'utf8'
-      })
-    }
+    var outputCSSFile = options.outputCSSFile || function (gear, clonedRoot) {}
     var dprList = (options.dprList || [3, 2, 1]).sort().reverse()
     fontGear = fontGear.sort().reverse()
     var urlRegExp = new RegExp('url\\([\'"]?\\S+?@(' + dprList.join('|') + ')x\\S+?[\'"]?\\)')
