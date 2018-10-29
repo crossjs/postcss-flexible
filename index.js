@@ -1,6 +1,8 @@
 'use strict';
 
 var postcss = require('postcss')
+var path = require('path')
+var fs = require('fs')
 
 var valueRegExp = /(dpr|rem|url)\((.+?)(px)?\)/
 var dprRegExp = /dpr\((\d+(?:\.\d+)?)px\)/
@@ -15,17 +17,34 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
     var baseDpr = options.baseDpr || 2
     var remUnit = options.remUnit || 75
     var remPrecision = options.remPrecision || 6
+    var enableFontSetting = options.enableFontSetting || false
+    var fontGear = Object.prototype.toString.call(options.fontGear) === '[object Array]' ? options.fontGear : [-1, 0, 1, 2, 3, 4]
     var addPrefixToSelector = options.addPrefixToSelector || function (selector, prefix) {
       if (/^html/.test(selector)) {
         return selector.replace(/^html/, 'html' + prefix)
       }
       return prefix + ' ' + selector
     }
+    var addFontSizeToSelector = function (originFontSize, gear = 0, baseDpr = 2) {
+      if (!enableFontSetting) {
+        return originFontSize
+      }
+      if (options.addFontSizeToSelector) {
+        return options.addFontSizeToSelector(originFontSize, gear, baseDpr)
+      }
+      return +originFontSize + gear*baseDpr
+    }
+    var outputCSSFile = options.outputCSSFile || function (gear, clonedRoot) {
+      gear !== undefined && fs.writeFileSync(path.join(__dirname, 'test/fontGear/fontGear_' + gear +'.css'), clonedRoot, {
+        encoding: 'utf8'
+      })
+    }
     var dprList = (options.dprList || [3, 2, 1]).sort().reverse()
+    fontGear = fontGear.sort().reverse()
     var urlRegExp = new RegExp('url\\([\'"]?\\S+?@(' + dprList.join('|') + ')x\\S+?[\'"]?\\)')
 
     // get calculated value of px or rem
-    function getCalcValue (value, dpr) {
+    function getCalcValue (value, dpr, gear) {
       var valueGlobalRegExp = new RegExp(valueRegExp.source, 'g')
 
       function getValue(val, type) {
@@ -39,7 +58,7 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
           }
         } else if ($1 === 'dpr') {
           if (dpr) {
-            return getValue($2 * dpr / baseDpr, 'px')
+            return getValue(addFontSizeToSelector($2, gear, baseDpr) * dpr / baseDpr, 'px')
           }
         } else if ($1 === 'rem') {
           return getValue($2 / remUnit, 'rem')
@@ -65,11 +84,10 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
       })
     }
 
-    function handleMobile (rule) {
+    function handleMobile (rule, gear) {
       if (rule.selector.indexOf('[data-dpr="') !== -1) {
         return
       }
-
       var newRules = []
       var hasDecls = false
 
@@ -78,7 +96,8 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
           selectors: rule.selectors.map(function (sel) {
             return addPrefixToSelector(sel, '[data-dpr="' + dprList[i] + '"]')
           }),
-          type: rule.type
+          type: rule.type,
+          customGear: gear
         })
         newRules.push(newRule)
       }
@@ -93,7 +112,7 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
               newRules.forEach(function (newRule, index) {
                 var newDecl = postcss.decl({
                   prop: decl.prop,
-                  value: getCalcValue(decl.value, dprList[index])
+                  value: getCalcValue(decl.value, dprList[index % dprList.length], newRule.customGear)
                 })
                 newRule.append(newDecl)
               })
@@ -107,6 +126,7 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
         }
       })
 
+      // insert the updated rules into its parent Node
       if (hasDecls) {
         newRules.forEach(function (newRule) {
           rule.parent.insertAfter(rule, newRule)
@@ -117,8 +137,22 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
       if (!rule.nodes.length) {
         rule.remove()
       }
+      // output the css file with different fontGear
+      if (hasDecls && outputCSSFile) {
+        outputCSSFile(gear, clonedRoot)
+      }
     }
-
+    if (enableFontSetting) {
+      for (var j = 0; j < fontGear.length; j++) {
+        var gear = fontGear[j]
+        // clone the root element so that the operation blow won't distructe the origin root element
+        var clonedRoot = root.clone()
+        clonedRoot.walkRules(function (rule) {
+          desktop ? handleDesktop(rule) : handleMobile(rule, gear)
+        })
+      }
+    } else {
+    }
     root.walkRules(function (rule) {
       desktop ? handleDesktop(rule) : handleMobile(rule)
     })
