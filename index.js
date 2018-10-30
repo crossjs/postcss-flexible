@@ -91,9 +91,10 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
       var hasDecls = false
 
       for (var i = 0; i < dprList.length; i++) {
+        var prefix = gear !== undefined ? '[data-dpr="' + dprList[i] + '"][data-fontgear="' + gear + '"]' :'[data-dpr="' + dprList[i] + '"]'
         var newRule = postcss.rule({
           selectors: rule.selectors.map(function (sel) {
-            return addPrefixToSelector(sel, '[data-dpr="' + dprList[i] + '"]')
+            return addPrefixToSelector(sel, prefix)
           }),
           type: rule.type,
           customGear: gear
@@ -149,6 +150,8 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
         clonedRoot.walkRules(function (rule) {
           desktop ? handleDesktop(rule) : handleMobile(rule, gear)
         })
+        // output the css file with different fontGear
+        outputCSSFile(gear, clonedRoot)
       }
     }
     root.walkRules(function (rule) {

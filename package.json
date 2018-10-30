@@ -1,6 +1,6 @@
 {
   "name": "postcss-flexible",
-  "version": "0.4.1",
+  "version": "0.5.1",
   "description": "flexible transformer for flexible",
   "main": "index.js",
   "scripts": {

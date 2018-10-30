@@ -3,44 +3,44 @@
     width: 1rem;
     line-height: 3
 }
-[data-dpr="1"] .selector, [data-dpr="1"] .selector2 {
+[data-dpr="1"][data-fontgear="2"] .selector, [data-dpr="1"][data-fontgear="2"] .selector2 {
     font-size: 18px;
     background-image: url(/images/qr@1x.png)
 }
-[data-dpr="2"] .selector, [data-dpr="2"] .selector2 {
+[data-dpr="2"][data-fontgear="2"] .selector, [data-dpr="2"][data-fontgear="2"] .selector2 {
     font-size: 36px;
     background-image: url(/images/qr@2x.png)
 }
-[data-dpr="3"] .selector, [data-dpr="3"] .selector2 {
+[data-dpr="3"][data-fontgear="2"] .selector, [data-dpr="3"][data-fontgear="2"] .selector2 {
     font-size: 54px;
     background-image: url(/images/qr@3x.png)
 }
-[data-dpr="1"] .selector3 {
+[data-dpr="1"][data-fontgear="2"] .selector3 {
     padding: 12px
 }
-[data-dpr="2"] .selector3 {
+[data-dpr="2"][data-fontgear="2"] .selector3 {
     padding: 24px
 }
-[data-dpr="3"] .selector3 {
+[data-dpr="3"][data-fontgear="2"] .selector3 {
     padding: 36px
 }
-[data-dpr="1"] .selector4 {
+[data-dpr="1"][data-fontgear="2"] .selector4 {
     background: url(/images/qr@1x.png) 12px 0.266667rem
 }
-[data-dpr="2"] .selector4 {
+[data-dpr="2"][data-fontgear="2"] .selector4 {
     background: url(/images/qr@2x.png) 24px 0.266667rem
 }
-[data-dpr="3"] .selector4 {
+[data-dpr="3"][data-fontgear="2"] .selector4 {
     background: url(/images/qr@3x.png) 36px 0.266667rem
 }
 @media screen and (min-width: 480px) {
-    [data-dpr="1"] body {
+    [data-dpr="1"][data-fontgear="2"] body {
         margin: 12px
     }
-    [data-dpr="2"] body {
+    [data-dpr="2"][data-fontgear="2"] body {
         margin: 24px
     }
-    [data-dpr="3"] body {
+    [data-dpr="3"][data-fontgear="2"] body {
         margin: 36px
     }
 }
@@ -52,12 +52,12 @@
         transform: rotate(1turn)
     }
 }
-html[data-dpr="1"][dir="rtl"] body {
+html[data-dpr="1"][data-fontgear="2"][dir="rtl"] body {
     padding: 6px
 }
-html[data-dpr="2"][dir="rtl"] body {
+html[data-dpr="2"][data-fontgear="2"][dir="rtl"] body {
     padding: 12px
 }
-html[data-dpr="3"][dir="rtl"] body {
+html[data-dpr="3"][data-fontgear="2"][dir="rtl"] body {
     padding: 18px
 }
