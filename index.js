@@ -137,10 +137,6 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
       if (!rule.nodes.length) {
         rule.remove()
       }
-      // output the css file with different fontGear
-      if (hasDecls && outputCSSFile) {
-        outputCSSFile(gear, clonedRoot)
-      }
     }
     if (enableFontSetting) {
       for (var j = 0; j < fontGear.length; j++) {
