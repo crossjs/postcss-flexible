@@ -27,7 +27,6 @@
         margin: 42px
     }
 }
-@keyframes c-spinner-snake {}
 html[data-dpr="1"][data-fontgear="2"][dir="rtl"] body {
     padding: 8px
 }

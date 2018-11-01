@@ -150,6 +150,11 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
         clonedRoot.walkRules(function (rule) {
           desktop ? handleDesktop(rule) : handleMobile(rule, gear)
         })
+        clonedRoot.walkAtRules(function(atRule) {
+          if (!atRule.nodes.length) {
+            atRule.remove()
+          }
+        })
         // output the css file with different fontGear
         outputCSSFile(gear, clonedRoot)
       }
