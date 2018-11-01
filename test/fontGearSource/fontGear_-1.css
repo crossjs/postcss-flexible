@@ -1,19 +1,11 @@
-.selector,
-.selector2 {
-    width: 1rem;
-    line-height: 3
-}
 [data-dpr="1"][data-fontgear="-1"] .selector, [data-dpr="1"][data-fontgear="-1"] .selector2 {
-    font-size: 15px;
-    background-image: url(/images/qr@1x.png)
+    font-size: 15px
 }
 [data-dpr="2"][data-fontgear="-1"] .selector, [data-dpr="2"][data-fontgear="-1"] .selector2 {
-    font-size: 30px;
-    background-image: url(/images/qr@2x.png)
+    font-size: 30px
 }
 [data-dpr="3"][data-fontgear="-1"] .selector, [data-dpr="3"][data-fontgear="-1"] .selector2 {
-    font-size: 45px;
-    background-image: url(/images/qr@3x.png)
+    font-size: 45px
 }
 [data-dpr="1"][data-fontgear="-1"] .selector3 {
     padding: 9px
@@ -23,15 +15,6 @@
 }
 [data-dpr="3"][data-fontgear="-1"] .selector3 {
     padding: 27px
-}
-[data-dpr="1"][data-fontgear="-1"] .selector4 {
-    background: url(/images/qr@1x.png) 9px 0.266667rem
-}
-[data-dpr="2"][data-fontgear="-1"] .selector4 {
-    background: url(/images/qr@2x.png) 18px 0.266667rem
-}
-[data-dpr="3"][data-fontgear="-1"] .selector4 {
-    background: url(/images/qr@3x.png) 27px 0.266667rem
 }
 @media screen and (min-width: 480px) {
     [data-dpr="1"][data-fontgear="-1"] body {
@@ -44,14 +27,7 @@
         margin: 27px
     }
 }
-@keyframes c-spinner-snake {
-    0% {
-        transform: rotate(0deg)
-    }
-    to {
-        transform: rotate(1turn)
-    }
-}
+@keyframes c-spinner-snake {}
 html[data-dpr="1"][data-fontgear="-1"][dir="rtl"] body {
     padding: 3px
 }

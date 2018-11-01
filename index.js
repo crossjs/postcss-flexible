@@ -114,7 +114,10 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
                   prop: decl.prop,
                   value: getCalcValue(decl.value, dprList[index % dprList.length], newRule.customGear)
                 })
-                newRule.append(newDecl)
+                 // filter out background prop when walking the clonedRoot
+                if (!/background/g.test(decl.prop) || (gear === undefined)) {
+                  newRule.append(newDecl)
+                }
               })
               hasDecls = true
               decl.remove() // delete this rule
@@ -126,15 +129,16 @@ module.exports = postcss.plugin('postcss-flexible', function (options) {
         }
       })
 
-      // insert the updated rules into its parent Node
-      if (hasDecls) {
+      // if the updated rule is not empty, insert it into its parent Node
+      if (hasDecls && newRule.nodes.length) {
         newRules.forEach(function (newRule) {
           rule.parent.insertAfter(rule, newRule)
         })
       }
 
       // if the origin rule has no declarations, delete it
-      if (!rule.nodes.length) {
+      // delete the origin rules when walking the clonedRoot
+      if (!rule.nodes.length || gear !== undefined) {
         rule.remove()
       }
     }
