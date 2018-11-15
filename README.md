@@ -82,16 +82,14 @@ After processing:
 
 ## Change Log
 
+
+### 0.5.0
+
 * add: generate different css files with fontGear
 * support custom `fontGear`
 * support custom `enableFontSetting`
 * support custom `addFontSizeToSelector`
 * support custom `outputCSSFile`
-
-
-### 0.5.0
-
-* support custom `dprList`
 
 ### 0.4.0
 
